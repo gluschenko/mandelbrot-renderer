@@ -163,30 +163,6 @@ namespace Fractals
             return Color.FromArgb(color / 3, color / 3, color);
         }
 
-        public static Color GetColorRainbow(double progress)
-        {
-            progress *= 0.2;
-            double div = (Math.Abs(progress % 1) * 6);
-            int ascending = (int)((div % 1) * 255);
-            int descending = 255 - ascending;
-
-            switch ((int)div)
-            {
-                case 0:
-                    return Color.FromArgb(255, 255, ascending, 0);
-                case 1:
-                    return Color.FromArgb(255, descending, 255, 0);
-                case 2:
-                    return Color.FromArgb(255, 0, 255, ascending);
-                case 3:
-                    return Color.FromArgb(255, 0, descending, 255);
-                case 4:
-                    return Color.FromArgb(255, ascending, 0, 255);
-                default: // case 5:
-                    return Color.FromArgb(255, 255, 0, descending);
-            }
-        }
-
         static double Calc(Complex C)
         {
             double MaxNorm = MaxExtent * MaxExtent;
