@@ -20,8 +20,8 @@ namespace Fractals
         public static string FormTitle = string.Format("Mandelbrot Set (v {0})", Version);
 
         static Thread RenderingThread;
-        static double MaxExtent = 4;
-        static int MaxIterations = 500;
+        static double MaxExtent = 6;
+        static int MaxIterations = 600;
 
         static double Zoom = 1;
         static double OffsetX = 0;
@@ -108,7 +108,10 @@ namespace Fractals
 
             RenderingThread = new Thread(RenderProc);
             RenderingThread.IsBackground = true;
-            RenderingThread.Start(MainForm.ClientSize);
+            //
+            int ImageScale = 4;
+
+            RenderingThread.Start(new Size(MainForm.ClientSize.Width * ImageScale, MainForm.ClientSize.Height * ImageScale));//MainForm.ClientSize
         }
 
         static void RenderProc(object args)
@@ -117,7 +120,7 @@ namespace Fractals
 
             int Width = 0x20;
 
-            while (Width * 2 < CanvasSize.Width)
+            while (Width * 2 < /*MainForm.ClientSize.Width*/CanvasSize.Width)
             {
                 int Height = Width * CanvasSize.Height / CanvasSize.Width;
                 Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
@@ -155,36 +158,13 @@ namespace Fractals
 
         static Color GetColor(double rate)
         {
-            const double MaxColor = 256;
-            const double Contrast = 0.15;
+            double MaxColor = 256;
+            double Contrast = 0.005 / rate + 0.001;//0.15
 
             int color = (int)(MaxColor * Math.Pow(rate, Contrast));
 
-            return Color.FromArgb(color / 3, color / 3, color);
-        }
-
-        public static Color GetColorRainbow(double progress)
-        {
-            progress *= 0.2;
-            double div = (Math.Abs(progress % 1) * 6);
-            int ascending = (int)((div % 1) * 255);
-            int descending = 255 - ascending;
-
-            switch ((int)div)
-            {
-                case 0:
-                    return Color.FromArgb(255, 255, ascending, 0);
-                case 1:
-                    return Color.FromArgb(255, descending, 255, 0);
-                case 2:
-                    return Color.FromArgb(255, 0, 255, ascending);
-                case 3:
-                    return Color.FromArgb(255, 0, descending, 255);
-                case 4:
-                    return Color.FromArgb(255, ascending, 0, 255);
-                default: // case 5:
-                    return Color.FromArgb(255, 255, 0, descending);
-            }
+            //return Color.FromArgb(0, (int)(MaxColor * rate), color);
+            return Color.FromArgb(color, (int)(MaxColor * rate), 0);
         }
 
         static double Calc(Complex C)
@@ -196,12 +176,12 @@ namespace Fractals
 
             while (Z.Norm() < MaxNorm && Iteration < MaxIterations)
             {
-                Z = Z * Z + C;
+                Z = Z * Z + C - 0.7;
                 //Z = Complex.Pow(Z, 10) + C;
                 Iteration++;
             }
 
-            if (Iteration < MaxIterations) return (double)Iteration / MaxIterations;
+            if (Iteration < MaxIterations)return (double)Iteration / MaxIterations;
             else return 0;
         }
 
@@ -209,6 +189,7 @@ namespace Fractals
         {
             if (MainForm.BackgroundImage != null) MainForm.BackgroundImage.Dispose();
             MainForm.BackgroundImage = img;
+            MainForm.Text = string.Format("{0} | {1}, {2}", FormTitle, img.Width, img.Height);
         }
 
         delegate void SetBitmapDelegate(Bitmap img);
