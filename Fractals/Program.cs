@@ -163,8 +163,12 @@ namespace Fractals
 
             int color = (int)(MaxColor * Math.Pow(rate, Contrast));
 
+<<<<<<< HEAD
             //return Color.FromArgb(0, (int)(MaxColor * rate), color);
             return Color.FromArgb(color, (int)(MaxColor * rate), 0);
+=======
+            return Color.FromArgb(color / 3, color / 3, color);
+>>>>>>> origin/master
         }
 
         static double Calc(Complex C)
