@@ -84,13 +84,14 @@ namespace Fractals
             double u = b.Re, v = b.Im;
             double denom = u * u + v * v;
 
-            if (denom == 0)
+            if (denom != 0)
             {
-                throw new DivideByZeroException();
+                a.Re = (double)((x * u + y * v) / denom);
+                a.Im = (double)((y * u - x * v) / denom);
             }
 
-            a.Re = (double)((x * u + y * v) / denom);
-            a.Im = (double)((y * u - x * v) / denom);
+            /*a.Re = (double)((x * u + y * v) / denom);
+            a.Im = (double)((y * u - x * v) / denom);*/
 
             return a;
         }

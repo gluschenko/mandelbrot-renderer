@@ -1,0 +1,7 @@
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\bin\x64\Debug\Fractals.exe.config
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\bin\x64\Debug\Fractals.exe
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\bin\x64\Debug\Fractals.pdb
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\obj\x64\Debug\Fractals.Properties.Resources.resources
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\obj\x64\Debug\Fractals.csproj.GenerateResource.Cache
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\obj\x64\Debug\Fractals.exe
+C:\Users\j\documents\visual studio 2013\Projects\Fractals\Fractals\obj\x64\Debug\Fractals.pdb
