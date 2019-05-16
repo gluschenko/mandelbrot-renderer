@@ -1,5 +1,5 @@
 # Mandelbrot-Renderer
-Utility for visualization of the Mandelbrot set.<br/>
+Visualization of Mandelbrot set<br/>
 <br/>
 Source code:<br/>
 Program.cs - main source file<br/>
